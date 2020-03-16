@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<link rel="icon" href="https://www.certainlending.com/favicon.ico">
+<head><title>Loan Underwriting Dashboard</title> {% extends "bootstrap/base.html" %}{% block content %}
+<link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<link rel="stylesheet" href="/static/css/app_styles.css">
+</head>
+
+<body style="background-image: url('https://d33wubrfki0l68.cloudfront.net/536b3b4b2a990b7cdb167bd18a2ddd4b2df33a35/88254/images/landingpage/hero/herocrop-sm-2x.jpg');
+background-repeat: round; height: 1000px">
+
+            <form action="" class="container" enctype="multipart/form-data" method="post">
+                <div id = 'outer_box'><div id = 'inner_box'>
+
+                <h1 style='color:#432B59;'><font face="monospace"> Certain Lending: Loan Underwriting Dashboard</font> </h1>
+                <hr color= '#432B59' id='big_hr' ><br>
+                <h3 id='list_style' style='color:#432B59'><font face="monospace"> <b> Property Profile: </b> </font> </h3>
+
+                {% if session['status'] %}
+
+                <h5 id='list_style'><font face="monospace"> General details: </font> </h5>
+                <ul id='list_style'>
+                  <li style='text-align: left'> <b> Address: </b> {{session['address']}} </li>
+                  <li style='text-align: left'> <b> Owner: </b> {{session['owner']}} </li>
+                  <li style='text-align: left'> <b> Type: </b> {{session['type']}} </li>
+                  <li style='text-align: left'> <b> Age of the property: </b> {{session['age']}} years</li>
+                </ul><br>
+
+                <h5 id='list_style'><font face="monospace"> Size and Amenities: </font> </h5>
+                <ul id='list_style'>
+                  <li style='text-align: left'> <b> Building Size: </b> {{session['building_size']}} </li>
+                  <li style='text-align: left'> <b> Number of Rooms: </b> {{session['num_rooms']}} </li>
+                  <li style='text-align: left'> <b> Number of Bathrooms: </b> {{session['num_baths']}} </li>
+                  <li style='text-align: left'> <b> Parking and Size: </b> {{session['parking']}} </li>
+                </ul><br>
+
+                <h5 id='list_style'><font face="monospace"> Assessment Details: </font> </h5>
+                <ul id='list_style'>
+                  <li style='text-align: left'> <b> Last Sale Date and Amount: </b> {{session['last_sale']}} </li>
+                  <li style='text-align: left'> <b> Total Market Value: </b> ${{session['total_market']}} </li>
+                  <li style='text-align: left'> <b> Land Market Value: </b> ${{session['land_market']}} </li>
+                  {% if session['delinquincy'] != 0 %}
+                  <li style='text-align: left'> <b> Delinquincy Year: </b> {{ session['delinquincy'] }} </li>
+                  {% endif %}
+                </ul><br>
+
+                <h5 id='list_style'><font face="monospace">
+                Scores and Automated Recommendations (not-dynamic): </font> </h5>
+                <ul id='list_style'>
+                  <li style='text-align: left'> <b> Percentile Score for Location and Accessibility: </b> 85% </li>
+                  <li style='text-align: left'> <b> Price Review: </b> Priced above the average by $30,000 </li>
+                  <li style='text-align: left'> <b> Amenities Review: </b> Average</li>
+                  <li style='text-align: left'> <b> Size Review: </b> Above Average </li>
+                  <li style='text-align: left'> <b> Previous Debts/Mortgage: </b> $15,000 </li>
+                </ul><br>
+
+                {% else %}
+
+                <h5 id='list_style' style='color:#432B59'><font face="monospace"> The Property details are unavailable. </font> </h5>
+
+                {% endif %}
+
+                <hr color= '#432B59' id='big_hr' style='width: 60%'><br>
+                {% if session['zip_status'] %}
+                <h3 id='list_style' style='color:#432B59'><font face="monospace"> <b> Neighborhood Profile: </b> </font> </h3>
+
+                <h5 id='list_style'><font face="monospace"> Neighborhood Averages: </font> </h5>
+                <ul id='list_style'>
+                  <li style='text-align: left'> <b> Average Assessed Value: </b> ${{session['average_assessed_value']}} </li>
+                  <li style='text-align: left'> <b> Average Assessed Value Per Unit: </b> ${{session['average_assessed_per_unit']}} </li>
+                  <li style='text-align: left'> <b> Average Age: </b> {{session['average_age']}} </li>
+                  <li style='text-align: left'> <b> Average Total Rooms: </b> {{session['average_total_rooms']}} years</li>
+                </ul><br>
+
+                <div id='dataviz_box'> <img src='/static/images/age.png' alt='Assessed Value with Age'  id ='image'/></div>
+                <div id='dataviz_box'> <img src='/static/images/rooms.png' alt='Assessed Value with rooms' id ='image'/> </div>
+
+                {% else %}
+                <h5 style='color:#432B59; text-align: left; margin-left: 60px'><font face="monospace"> The Property details for the neighborhood are unavailable. </font> </h5>
+                {% endif %}<br><br>
+
+                <button type="submit" name='submit_button' class="btn btn-success" value='go_back' id='back_button'>
+                Go Back</button>
+              </div></div> <br> </form><script src="/static/js/app_script.js"> </script>
+{% endblock %}
+    </body>
+</html>
